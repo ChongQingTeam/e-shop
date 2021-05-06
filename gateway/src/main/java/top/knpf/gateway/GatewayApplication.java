@@ -7,7 +7,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 /**
  * 网关
  */
-@SpringBootApplication(scanBasePackages = {"top.knpf.gateway","top.knpf.security"})
+@SpringBootApplication(scanBasePackages = {"top.knpf.gateway","top.knpf.security","top.knpf.service"})
 @EnableDiscoveryClient
 public class GatewayApplication {
 

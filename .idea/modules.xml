@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/api_b/api_b.iml" filepath="$PROJECT_DIR$/api_b/api_b.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/config/config.iml" filepath="$PROJECT_DIR$/common/config/config.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/dao/dao.iml" filepath="$PROJECT_DIR$/common/dao/dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/domain/domain.iml" filepath="$PROJECT_DIR$/common/domain/domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/e-shop.iml" filepath="$PROJECT_DIR$/e-shop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gateway/gateway.iml" filepath="$PROJECT_DIR$/gateway/gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/model/model.iml" filepath="$PROJECT_DIR$/common/model/model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/security/security.iml" filepath="$PROJECT_DIR$/common/security/security.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/service/service.iml" filepath="$PROJECT_DIR$/common/service/service.iml" />
+    </modules>
+  </component>
+</project>
