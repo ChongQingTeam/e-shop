@@ -11,6 +11,7 @@
         <module name="dao" />
         <module name="api_b" />
         <module name="service" />
+        <module name="utils" />
         <module name="domain" />
         <module name="model" />
         <module name="config" />
@@ -28,6 +29,7 @@
       <module name="model" target="8" />
       <module name="security" target="8" />
       <module name="service" target="8" />
+      <module name="utils" target="8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -41,6 +43,7 @@
       <module name="model" options="" />
       <module name="security" options="" />
       <module name="service" options="" />
+      <module name="utils" options="" />
     </option>
   </component>
 </project>

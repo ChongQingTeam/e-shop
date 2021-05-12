@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/test")
+@RequestMapping("/b/test")
 public class TestController {
 
     @GetMapping("/hello")

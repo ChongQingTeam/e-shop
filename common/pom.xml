@@ -19,6 +19,7 @@
         <module>dao</module>
         <module>model</module>
         <module>domain</module>
+        <module>utils</module>
     </modules>
 
 </project>
