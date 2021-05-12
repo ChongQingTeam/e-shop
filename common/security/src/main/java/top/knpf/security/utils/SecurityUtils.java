@@ -24,7 +24,7 @@ public class SecurityUtils {
      */
     public static User login(String username, String password, AuthenticationManager authenticationManager) throws AuthenticationException {
         //使用security框架自带的验证token生成器  也可以自定义。
-        UsernamePasswordAuthenticationToken token =new UsernamePasswordAuthenticationToken(username,password );
+        UsernamePasswordAuthenticationToken token =new UsernamePasswordAuthenticationToken(username,password);
         Authentication authenticate = authenticationManager.authenticate(token);
         SecurityContextHolder.getContext().setAuthentication(authenticate);
         User user = (User) authenticate.getPrincipal();

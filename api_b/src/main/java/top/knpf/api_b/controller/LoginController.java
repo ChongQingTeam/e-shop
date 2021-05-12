@@ -1,4 +1,4 @@
-package top.knpf.gateway.controller;
+package top.knpf.api_b.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
