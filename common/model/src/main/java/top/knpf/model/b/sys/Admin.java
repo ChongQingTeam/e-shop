@@ -19,4 +19,6 @@ public class Admin {
     private String fullName;
     @TableField("mobile")
     private String mobile;
+    @TableField("avatar")
+    private String avatar;
 }

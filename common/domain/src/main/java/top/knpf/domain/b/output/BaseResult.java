@@ -16,6 +16,14 @@ public class BaseResult<T> {
         return this;
     }
 
+    public BaseResult renderSuccess(T data) {
+        setMsg("成功");
+        setSuccess(true);
+        setStatus("200");
+        setResult(data);
+        return this;
+    }
+
     public BaseResult renderSuccess(String msg) {
         setMsg(msg);
         setSuccess(true);

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="top.knpf.dao.b.SysAdminMapper">
+
+    <select id="listAdminRoles" resultType="java.lang.String">
+        select role_name from sys_role where id in (select role_id from sys_admin_role where admin_id = 1);
+    </select>
+</mapper>
