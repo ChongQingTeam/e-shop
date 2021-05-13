@@ -7,5 +7,6 @@ public class AdminInfo {
 
     private String adminName;
     private String adminEmail;
+    private String token;
 
 }
