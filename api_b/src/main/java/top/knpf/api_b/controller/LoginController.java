@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import top.knpf.domain.b.input.BLoginFormParam;
 import top.knpf.domain.b.output.BaseResult;
 import top.knpf.security.utils.SecurityUtils;
+import top.knpf.utils.security.AESUtils;
 import top.knpf.utils.security.TokenUtils;
 
 @Slf4j
@@ -21,20 +22,20 @@ public class LoginController {
     @Autowired
     AuthenticationManager authenticationManager;
 
-    @PostMapping("/success")
-    public String success(){
-        return "登录成功！";
-    }
-
     @PostMapping("/do")
     public BaseResult<String> login(@RequestBody BLoginFormParam param)  {
         BaseResult<String> baseResult = new BaseResult<>();
-        User user = SecurityUtils.login(param.getUsername(), param.getPassword(), authenticationManager);
-        if(user == null){
-            return baseResult.renderError("登陆失败","401");
+        try{
+            String desPwd = AESUtils.decrypt(param.getPassword());
+            User user = SecurityUtils.login(param.getUsername(), desPwd, authenticationManager);
+            if(user != null){
+                String token = TokenUtils.buildJWT(param.getUsername());
+                return baseResult.renderSuccess("登录成功","200", token);
+            }
+        }catch (Exception e){
+            return baseResult.renderError("登陆失败:" + e.getMessage(),"401");
         }
-        String token = TokenUtils.buildJWT(param.getUsername());
-        return baseResult.renderSuccess("登录成功","200", token);
+        return baseResult.renderError("登陆失败","401");
     }
 
 }
