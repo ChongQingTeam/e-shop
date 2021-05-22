@@ -1,14 +1,14 @@
 package top.knpf.utils.security;
 
-import com.nimbusds.jose.JOSEException;
-import com.nimbusds.jose.JWSAlgorithm;
-import com.nimbusds.jose.JWSHeader;
-import com.nimbusds.jose.KeyLengthException;
+import com.nimbusds.jose.*;
 import com.nimbusds.jose.crypto.MACSigner;
+import com.nimbusds.jose.crypto.MACVerifier;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
+import top.knpf.domain.b.output.BaseResult;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class TokenUtils {
     /**
@@ -60,5 +60,38 @@ public class TokenUtils {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * 校验token
+     * @param token
+     * @return
+     */
+    public static BaseResult vaildToken(String token ) {
+        BaseResult baseResult = new BaseResult();
+        try {
+            SignedJWT jwt = SignedJWT.parse(token);
+            JWSVerifier verifier = new MACVerifier(SECRET);
+            //校验是否有效
+            if (!jwt.verify(verifier)) {
+                return baseResult.renderError("验证失败");
+            }
+
+            //校验超时
+            Date expirationTime = jwt.getJWTClaimsSet().getExpirationTime();
+            if (new Date().after(expirationTime)) {
+                return baseResult.renderError("Token 已过期");
+            }
+
+            //获取载体中的数据
+            Object account = jwt.getJWTClaimsSet().getClaim("ACCOUNT");
+            //是否有openUid
+            if (Objects.isNull(account)){
+                return baseResult.renderError("账号为空");
+            }
+            return baseResult.renderSuccess();
+        } catch (Exception e) {
+            return baseResult.renderError("验证失败");
+        }
     }
 }
