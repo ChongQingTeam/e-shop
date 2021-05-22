@@ -66,3 +66,4 @@ alter table sys_role
 alter table sys_role modify id int auto_increment;
 
 INSERT INTO `e-shop`.sys_role (role_name, is_delete, create_time, update_time) VALUES ('admin', DEFAULT, DEFAULT, DEFAULT)
+--
