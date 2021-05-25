@@ -21,7 +21,8 @@ public class AdminController {
     ISysAdminService adminService;
 
     @GetMapping("/info/get")
-    public BaseResult<AdminInfo> getAdminInfo(@RequestParam("username") String username){
+    public BaseResult<AdminInfo> getAdminInfo(@RequestParam(value = "username",required = false,
+            defaultValue = "admin") String username){
         BaseResult<AdminInfo> adminInfo = new BaseResult<>();
         Admin baseInfo = adminService.getAdminByUsername(username);
         List<String> roles = adminService.listAdminRoles(baseInfo.getId());
