@@ -28,8 +28,8 @@ public class Catalog {
     private String icon;
     @TableField("remark")
     private String remark;
-    @TableField("created")
-    private Date created;
-    @TableField("updated")
-    private Date updated;
+    @TableField("create_time")
+    private Date createTime;
+    @TableField("update_time")
+    private Date updateTime;
 }

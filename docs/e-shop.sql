@@ -69,16 +69,16 @@ INSERT INTO `e-shop`.sys_role (role_name, is_delete, create_time, update_time) V
 
 -- e_item_catalog
 CREATE TABLE `e_item_catalog` (
-                                  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '类目ID',
-                                  `parent_id` bigint(20) DEFAULT NULL COMMENT '父分类ID=0时代表一级根分类',
+                                  `id` int(20) NOT NULL AUTO_INCREMENT COMMENT '类目ID',
+                                  `parent_id` int(20) DEFAULT NULL COMMENT '父分类ID=0时代表一级根分类',
                                   `name` varchar(50) DEFAULT NULL COMMENT '分类名称',
                                   `status` int(1) DEFAULT '1' COMMENT '状态 1启用 0禁用',
                                   `sort_order` int(4) DEFAULT NULL COMMENT '排列序号',
                                   `is_parent` tinyint(1) DEFAULT '1' COMMENT '是否为父分类 1为true 0为false',
                                   `icon` varchar(255) DEFAULT NULL COMMENT '图标',
                                   `remark` varchar(255) DEFAULT NULL COMMENT '备注',
-                                  `created` datetime DEFAULT NULL COMMENT '创建时间',
-                                  `updated` datetime DEFAULT NULL COMMENT '更新时间',
+                                  `create_time` datetime now()  NULL COMMENT '创建时间',
+                                  `update_time` datetime now()  NULL COMMENT '更新时间',
                                   PRIMARY KEY (`id`),
                                   KEY `parent_id` (`parent_id`,`status`) USING BTREE,
                                   KEY `sort_order` (`sort_order`)

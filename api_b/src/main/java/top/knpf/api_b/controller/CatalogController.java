@@ -1,10 +1,8 @@
 package top.knpf.api_b.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import top.knpf.domain.b.input.CatalogBO;
 import top.knpf.domain.b.output.BaseResult;
 import top.knpf.model.b.Catalog;
 import top.knpf.service.b.ICatalogService;
@@ -30,6 +28,18 @@ public class CatalogController {
     BaseResult<Boolean> delete(@RequestParam List<Integer> ids){
         BaseResult<Boolean> result = new BaseResult<>();
         Boolean flag = catalogService.batchDelete(ids);
+        return result.renderSuccess(flag);
+    }
+
+    @PostMapping("/add_or_update")
+    BaseResult<Boolean> add(@RequestBody CatalogBO catalogBO){
+        BaseResult<Boolean> result = new BaseResult<>();
+        Boolean flag = false;
+        if(catalogBO.getId() == null){
+            flag = catalogService.add(catalogBO);
+        }else {
+            flag = catalogService.updateSelf(catalogBO);
+        }
         return result.renderSuccess(flag);
     }
 }
