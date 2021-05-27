@@ -1,4 +1,5 @@
 package top.knpf.service.b;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,5 +54,15 @@ public class CatalogServiceImpl extends ServiceImpl<CatalogMapper, Catalog> impl
         catalog.setStatus(0);
         int count = catalogMapper.updateById(catalog);
         return count>0?true:false;
+    }
+
+    @Override
+    public List<Catalog> getNavCatalog() {
+        LambdaQueryWrapper<Catalog> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Catalog::getParentId,0);
+        wrapper.eq(Catalog::getStatus, 1);
+        wrapper.ne(Catalog::getId, -1);
+        wrapper.orderByAsc(Catalog::getSortOrder);
+        return catalogMapper.selectList(wrapper);
     }
 }

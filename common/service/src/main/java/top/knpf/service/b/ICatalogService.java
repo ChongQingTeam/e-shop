@@ -15,4 +15,6 @@ public interface ICatalogService extends IService<Catalog> {
     Boolean updateSelf(CatalogBO catalogBO);
 
     Boolean delete(Integer id);
+
+    List<Catalog> getNavCatalog();
 }

@@ -115,6 +115,7 @@
         <module>gateway</module>
         <module>common</module>
         <module>api_b</module>
+        <module>api_c</module>
     </modules>
 
 
