@@ -36,14 +36,22 @@ public class CatalogServiceImpl extends ServiceImpl<CatalogMapper, Catalog> impl
     @Override
     public Boolean updateSelf(CatalogBO catalogBO) {
         Catalog catalog = new Catalog();
-        catalog.setId(catalog.getId());
+        catalog.setId(catalogBO.getId());
         catalog.setParentId(catalogBO.getParentId());
         catalog.setName(catalogBO.getName());
-        catalog.setStatus(0);
+        catalog.setStatus(catalogBO.getStatus());
         catalog.setSortOrder(catalogBO.getSortOrder());
         catalog.setIsParent(catalogBO.getIsParent());
         catalog.setIcon(catalogBO.getIcon());
         catalog.setRemark(catalogBO.getRemark());
         return catalogMapper.updateById(catalog)>0?true:false;
+    }
+
+    @Override
+    public Boolean delete(Integer id) {
+        Catalog catalog = catalogMapper.selectById(id);
+        catalog.setStatus(0);
+        int count = catalogMapper.updateById(catalog);
+        return count>0?true:false;
     }
 }

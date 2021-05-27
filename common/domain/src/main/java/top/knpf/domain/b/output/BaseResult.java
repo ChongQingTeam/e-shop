@@ -8,6 +8,7 @@ public class BaseResult<T> {
     private boolean success;
     private String msg;
     private T result;
+    private int count;
 
     public BaseResult renderSuccess() {
         setMsg("成功");
@@ -21,6 +22,15 @@ public class BaseResult<T> {
         setSuccess(true);
         setStatus("200");
         setResult(data);
+        return this;
+    }
+
+    public BaseResult renderSuccess(T data, int count) {
+        setMsg("成功");
+        setSuccess(true);
+        setStatus("200");
+        setResult(data);
+        setCount(count);
         return this;
     }
 
@@ -39,6 +49,13 @@ public class BaseResult<T> {
 
     public BaseResult renderSuccess(String msg, String status, T obj) {
         renderSuccess(msg, status);
+        setResult(obj);
+        return this;
+    }
+
+    public BaseResult renderSuccess(String msg, String status, T obj, int count) {
+        renderSuccess(msg, status);
+        setCount(count);
         setResult(obj);
         return this;
     }
