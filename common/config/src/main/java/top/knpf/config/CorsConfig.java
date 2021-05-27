@@ -22,6 +22,8 @@ public class CorsConfig {
         corsConfiguration.addAllowedHeader("*");
         corsConfiguration.addAllowedMethod(HttpMethod.GET);
         corsConfiguration.addAllowedMethod(HttpMethod.POST);
+        corsConfiguration.addAllowedMethod(HttpMethod.DELETE);
+        corsConfiguration.addAllowedMethod(HttpMethod.PUT);
         corsConfiguration.addAllowedOrigin("*");
         return corsConfiguration;
     }
