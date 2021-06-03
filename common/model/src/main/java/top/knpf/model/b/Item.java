@@ -8,7 +8,6 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 
 @Data
 @TableName("e_item")
@@ -27,7 +26,7 @@ public class Item {
     @TableField("limit_num")
     private int limitNum;
     @TableField("image")
-    private List<String> image;
+    private String[] image;
     @TableField("cid")
     private int cid;
     @TableField("status")

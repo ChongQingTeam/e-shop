@@ -1,14 +1,12 @@
 package top.knpf.api_b.controller;
 
-import cn.hutool.core.bean.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import top.knpf.domain.b.input.ItemBO;
 import top.knpf.domain.b.output.BaseResult;
 import top.knpf.domain.b.output.ItemDto;
-import top.knpf.model.b.Item;
 import top.knpf.service.b.IItemService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -26,10 +24,11 @@ public class ItemController {
     }
 
     @PostMapping("/list")
-    BaseResult<List<ItemDto>> list(){
+    BaseResult<List<ItemDto>> list(@RequestBody ItemBO bo){
         BaseResult<List<ItemDto>> baseResult = new BaseResult<>();
-        List<Item> items = itemService.list();
-        return baseResult.renderSuccess(toDtos(items));
+        List<ItemDto> items = itemService.conditionList(bo);
+        int count = itemService.countList(bo);
+        return baseResult.renderSuccess(items, count);
     }
 
     @GetMapping("/delete/{id}")
@@ -44,13 +43,4 @@ public class ItemController {
         return baseResult;
     }
 
-    private List<ItemDto> toDtos(List<Item> items) {
-        List<ItemDto> dtos = new ArrayList<>();
-        items.stream().forEach(item -> {
-            ItemDto dto = new ItemDto();
-            BeanUtil.copyProperties(item, dto);
-            dtos.add(dto);
-        });
-        return dtos;
-    }
 }

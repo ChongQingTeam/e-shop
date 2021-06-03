@@ -3,7 +3,6 @@ package top.knpf.domain.b.output;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @Data
 public class ItemDto {
@@ -13,7 +12,7 @@ public class ItemDto {
     private BigDecimal price;
     private int num;
     private int limitNum;
-    private List<String> image;
+    private String[] image;
     private String catalog;
     private String itemDesc;
     private int status;

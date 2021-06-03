@@ -2,5 +2,72 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="top.knpf.dao.b.ItemMapper">
 
+    <resultMap type="top.knpf.domain.b.output.ItemDto" id="item-base">
+        <result property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="sellPoint" column="sell_point"/>
+        <result property="price" column="price"/>
+        <result property="num" column="num"/>
+        <result property="limitNum" column="limit_num"/>
+        <result property="image" column="image" typeHandler="top.knpf.dao.b.dbconf.handler.ArrayTypeHandler"/>
+        <result property="status" column="status"/>
+        <result property="catalog" column="catalog"/>
+        <result property="itemDesc" column="itemDesc"/>
+    </resultMap>
 
+
+
+    <select id="conditionList" resultMap="item-base">
+        SELECT i.id, i.title, i.sell_point, i.price, i.num
+             , i.limit_num, i.image, i.status, c.name AS catalog, d.item_desc AS itemDesc
+        FROM e_item i
+            LEFT JOIN e_item_catalog c ON i.cid = c.id
+            LEFT JOIN e_item_desc d ON i.id = d.item_id
+            WHERE 1 = 1
+            <if test="bo.title != null and bo.title != ''">
+                AND i.title like '%${bo.title}%'
+            </if>
+            <if test="bo.sellPoint != null and bo.sellPoint != ''">
+                AND i.sell_point like '%${bo.sellPoint}%'
+            </if>
+            <if test="bo.beginPrice != null">
+                AND i.price <![CDATA[>=]]> #{bo.beginPrice}
+            </if>
+            <if test="bo.endPrice != null">
+                AND i.price <![CDATA[<=]]> #{bo.endPrice}
+            </if>
+            <if test="bo.catalog != null and bo.catalog != ''">
+                AND c.name = #{bo.catalog}
+            </if>
+            <if test="bo.itemDesc != null and bo.itemDesc != ''">
+                AND d.item_desc like '%${bo.itemDesc}%'
+            </if>
+            LIMIT #{startPageNum}, #{bo.pageSize}
+    </select>
+
+    <select id="countList" resultType="java.lang.Integer">
+        SELECT count(i.id)
+        FROM e_item i
+        LEFT JOIN e_item_catalog c ON i.cid = c.id
+        LEFT JOIN e_item_desc d ON i.id = d.item_id
+        WHERE 1 = 1
+        <if test="bo.title != null and bo.title != ''">
+            AND i.title like '%${bo.title}%'
+        </if>
+        <if test="bo.sellPoint != null and bo.sellPoint != ''">
+            AND i.sell_point like '%${bo.sellPoint}%'
+        </if>
+        <if test="bo.beginPrice != null">
+            AND i.price <![CDATA[>=]]> #{bo.beginPrice}
+        </if>
+        <if test="bo.endPrice != null">
+            AND i.price <![CDATA[<=]]> #{bo.endPrice}
+        </if>
+        <if test="bo.catalog != null and bo.catalog != ''">
+            AND c.name = #{bo.catalog}
+        </if>
+        <if test="bo.itemDesc != null and bo.itemDesc != ''">
+            AND d.item_desc like '%${bo.itemDesc}%'
+        </if>
+    </select>
 </mapper>
