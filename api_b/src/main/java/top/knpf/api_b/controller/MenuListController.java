@@ -1,6 +1,5 @@
 package top.knpf.api_b.controller;
 
-import jdk.nashorn.internal.ir.LiteralNode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,7 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 import top.knpf.domain.b.output.BaseResult;
 import top.knpf.model.b.MenuList;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,11 +56,16 @@ public class MenuListController {
         List<MenuList> reportsManageNodeChild = new ArrayList<>();
         reportsManageNodeChild.add(new MenuList(146, "数据报表", "reports", new ArrayList<>(), "null"));
 
+        //爬虫管理
+        List<MenuList> crawlerManageNodeChild = new ArrayList<>();
+        crawlerManageNodeChild.add(new MenuList(156, "爬虫配置", "crawler/config", new ArrayList<>(), "null"));
+        crawlerManageNodeChild.add(new MenuList(157, "爬虫运行", "crawler/run", new ArrayList<>(), "null"));
+
+        MenuList crawlerManageNode = new MenuList(155, "爬虫管理", "crawler", crawlerManageNodeChild, "1");
+        rootList.add(crawlerManageNode);
+
         MenuList reportsManageNode = new MenuList(145, "数据统计", "reports", reportsManageNodeChild, "5");
         rootList.add(reportsManageNode);
-
-
-
 
 
         return b.renderSuccess("登录成功","200", rootList);
